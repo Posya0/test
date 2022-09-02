@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{% block title %}Запуск Workflow "{{name}}"{% endblock %}</h2>
+    <form method="post">
+    <style>
+    .row {padding:10px;}
+    </style>
+        <div id="Spisok">
+        {% for variable in variables %}
+            <div class="row">
+                <div class="col-md-2">{{variable}}</div>
+                <div class="col-md-5"><input type="text" name="variable{{loop.index}}" placeholder="{{variable}}" class="form-control" value="{{ request.form['variable'+loop.index|string] }}"></input></div>
+                <div class="col-md-1"><button  name="copy" class="btn btn-primary" value="{{loop.index}}">-></button></div>
+            </div>
+        {% endfor %}
+        <hr>
+        <div class="row">
+                <div class="col-md-2"><b>Отправить письмо</b></div>
+                <div class="col-md-5"><input type="text" name="email" placeholder="petrov@mail.ru" class="form-control" value="{{ request.form['email'] }}"></input></div>
+        </div>
+    </div>
+    <label>Письмо</label>
+    <textarea name="mail" placeholder="Кандидат: [[ФИО]]" class="form-control" value="{{ request.form['mail'] }}">{{mail}}</textarea>
+    <br>
+    <button  name="submit" class="btn btn-primary" value="Submit">Submit</button>
+    </div>
+    </form>
+{% endblock %}

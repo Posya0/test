@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %}Список шаблонов Workflow{% endblock %}</h1>
+    {% for wf in wfs %}
+        <a href="{{ url_for('template', id=wf['id']) }}">
+            <h2>{{wf['name']}}</h2>
+        </a>
+        <a href="{{ url_for('run', id=wf['id']) }}" class="badge badge-success">Запустить</a>
+        <hr>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{% block title %}{{name}}{% endblock %}</h2>
+    <div>
+        {% for variable in variables %}
+            <div class="row">
+                <div class="col-md-2">Переменная</div>
+                <div class="col-md-10">{{variable}}</div>
+            </div>
+            <br>
+        {% endfor %}
+    </div>
+{% endblock %}
