@@ -1,13 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %}Список шаблонов Workflow{% endblock %}</h1>
-    {% for name in names %}
-        <a href="{{ url_for('workflow', wf_id=name) }}">
-            <h2>{{name}}</h2>
+    <h1>{% block title %} Склад: Накладные{% endblock %}</h1>
+    {% for number in numbers %}
+        <a href="{{ url_for('note', note_id=number['id']) }}">
+            <h2>Накладная №{{ number['id']|string }} от {{ number['shtrih'][-10:]}}</h2>
         </a>
-        <a href="{{ url_for('run', wf_id=name) }}" class="badge badge-success">Запустить</a>
+        {% for name in names %}
+            {% if name['reason'] == number['shtrih'] %}
+                <span class="badge badge-primary">{{ name['consignee'] }}</span>
+            {%- endif %}
+        {% endfor %}
+        {% if number['vidan'] %}
+            <span class="badge badge-success"> выдан </span>
+        {% else %}
+            <span class="badge badge-danger"> не выдан </span>
+        {%- endif %}
+        </a>
         <hr>
     {% endfor %}
-
 {% endblock %}

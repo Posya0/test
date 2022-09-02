@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{% block title %} Накладная №{{ note['id']|string }} от {{ note['shtrih'][-10:]}} {% endblock %}</h2>
+    <span class="badge badge-primary">{{ consignee }}</span>
+    {% if note['vidan'] %}
+        <span class="badge badge-success"> выдан </span>
+    {% else %}
+        <span class="badge badge-danger"> не выдан </span>
+    {%- endif %}
+    <p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Позиция</th>
+                    <th scope="col">Единица измерения</th>
+                    <th scope="col">Количество</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for element in spisok %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ element['tovar'] }}</td>
+                        <td>{{ element['ed']|string }}</td>
+                        <td>{{ element['num']|string }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if note['vidan'] %}
+            <p><h5>Товары были выданы {{ note['date'] }}</h5></p>
+        {% else %}
+            <p>
+                <form method="POST">
+                    <button type="submit" class="btn btn-primary btn-sm">Выдать</button>
+                </form>
+            </p>
+        {%- endif %}
+    </p>
+{% endblock %}
