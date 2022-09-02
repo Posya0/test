@@ -7,23 +7,29 @@
     .row {padding:10px;}
     </style>
         <div id="Spisok">
-        {% for variable in variables %}
+        {% for par in parametrs %}
             <div class="row">
-                <div class="col-md-2">{{variable}}</div>
-                <div class="col-md-5"><input type="text" name="variable{{loop.index}}" placeholder="{{variable}}" class="form-control" value="{{ request.form['variable'+loop.index|string] }}"></input></div>
-                <div class="col-md-1"><button  name="copy" class="btn btn-primary" value="{{loop.index}}">-></button></div>
+                <div class="col-md-2">{{par}}</div>
+                <div class="col-md-4"><input type="text" name="per{{loop.index}}" placeholder="Введите значение" class="form-control" value="{{ request.form['per'+loop.index|string] }}"></input></div>
+                <div class="col-md-1"><button  name="submit_button" class="btn btn-primary" value="{{loop.index}}">-></button></div>
             </div>
         {% endfor %}
         <hr>
         <div class="row">
-                <div class="col-md-2"><b>Отправить письмо</b></div>
-                <div class="col-md-5"><input type="text" name="email" placeholder="petrov@mail.ru" class="form-control" value="{{ request.form['email'] }}"></input></div>
+                <div class="col-md-2"><p style="width: 50px;"><b>Отправить письмо</b></p></div>
+                <div class="col-md-4"><input type="text" name="mail" placeholder="Почта" class="form-control" value="{{ request.form['mail'] }}"></input></div>
         </div>
     </div>
+    <div class="col-md-1">
     <label>Письмо</label>
-    <textarea name="mail" placeholder="Кандидат: [[ФИО]]" class="form-control" value="{{ request.form['mail'] }}">{{mail}}</textarea>
+    </div>
+    <div class="col-md-12">
+    <textarea name="content" placeholder="Текст письма"
+                  class="form-control col-md-11" value="{{ request.form['content'] }}">{{content}}</textarea>
+    </div>
     <br>
-    <button  name="submit" class="btn btn-primary" value="Submit">Submit</button>
+    <div class="col-md-12">
+    <button  name="submit" class="btn btn-primary" value="Submit">Запустить</button>
     </div>
     </form>
 {% endblock %}

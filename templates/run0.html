@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %}Выберете Workflow{% endblock %}</h1>
+    <form method="post">
+    <div>
+        <select name="workflow" id="workflow">
+            <option value="None">Не выбран</option>
+            {% for name in names %}
+                <option value="{{name}}">{{name}}</option>
+            {% endfor %}
+        </select>
+    <hr>
+        <button type="submit" class="btn btn-primary">Запустить</button>
+    </div>
+    </form>
+{% endblock %}

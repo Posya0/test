@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{% block title %}Создать новый шаблон Workflow{% endblock %}</h1>
+<h1>{% block title %} Создать новый шаблон Workflow {% endblock %}</h1>
 
  <script>
 $(document).ready(function() {
@@ -19,7 +19,7 @@ $(AddButton).click(function (e)  //on add input button click
     {
         FieldCount++; //text box added increment
         //add input box
-        $(InputsWrapper).append('<div class="row"><div  class="col-md-2" >Переменная</div><div  class="col-md-6"><input type="text" placeholder="Переменная '+ FieldCount +'"  class="form-control" name="variable" value=""/></div></p><div class="col-md-2"><a href="#" class="btn btn-danger removeclass">×</a></div></div>');
+        $(InputsWrapper).append('<div class="row"><div  class="col-md-2" >Переменная</div><div  class="col-md-6"><input type="text" placeholder="Переменная '+ FieldCount +'"  class="form-control" name="per" id="field_'+ FieldCount +'" value=""/></div><a href="#" class="btn btn-danger removeclass">×</a></div>');
         x++; //text box increment
     }
     return false;
@@ -38,6 +38,10 @@ $("body").on("click",".removeclass", function(e){ //user click on remove text
 </script>
 <style>
 .row {padding:10px;}
+.colortext {
+background-color: #F7D96A; /* Цвет фона */
+color: #0; /* Цвет текста */
+}
 </style>
     <div class="form-group">
         <form method="post">
@@ -45,13 +49,13 @@ $("body").on("click",".removeclass", function(e){ //user click on remove text
             <div class="row">
                 <div class="col-md-2"><b>Название</b></div>
                 <div class="col-md-10">
-                    <input type="text" name="name" id="name" placeholder="Название Workflow" class="form-control bg-warning text-dark" value="{{request.form['name']}}"></input>
+                    <input type="text" name="workflow" id="workflow" placeholder="Название" class="form-control colortext" value="{{request.form['workflow']}}"></input>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-2">Переменная</div>
-                <div class="col-md-6"><input type="text" name="variable" placeholder="Переменная" class="form-control bg-warning text-dark" value="{{ request.form['variable'] }}"></input></div>
-                <div class="col-md-4"><button type="button" name="add" id="AddMoreFileBox" class="btn btn-primary">Добавить переменную</button></div>
+                <div class="col-md-6"><input type="text" name="per" placeholder="Переменная" class="form-control colortext" value="{{ request.form['per'] }}"></input></div>
+                <div><button type="button" name="add" id="AddMoreFileBox" class="btn btn-primary">Добавить переменную</button></div>
             </div>
         </div>
         <br/>
